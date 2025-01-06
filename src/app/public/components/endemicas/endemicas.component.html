@@ -1,0 +1,13 @@
+<div class="container">
+  <h2 class="text-center mb-4">Plantas Endémicas para Atraer Polinizadores</h2>
+  <div class="row">
+    <div *ngFor="let planta of plantasEndemicas" class="col-md-6 mb-4">
+      <div class="card" [ngClass]="{'bg-primary text-white': planta.clima === 'Frío', 'bg-warning text-dark': planta.clima === 'Caliente'}">
+        <div class="card-body">
+          <h5 class="card-title">{{ planta.planta }} (Clima: {{ planta.clima }})</h5>
+          <p><strong>Polinizadores que atrae:</strong> {{ planta.polinizadores.join(', ') }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

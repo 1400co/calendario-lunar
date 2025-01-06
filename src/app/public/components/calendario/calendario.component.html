@@ -1,0 +1,16 @@
+<div class="container">
+  <h2 class="text-center mb-4">Calendario Lunar del Mes</h2>
+  <div *ngFor="let group of groupedDays" class="mb-4">
+    <h4 class="text-primary">Del {{ group.range }}: {{ group.activity }}</h4>
+    <div class="row">
+      <div *ngFor="let day of group.days" class="col-md-2 mb-3">
+        <div class="card text-center" [ngClass]="{'bg-warning': day.isToday}">
+          <div class="card-body">
+            <h5 class="card-title">{{ day.date }}</h5>
+            <p class="card-text">{{ day.phase }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
