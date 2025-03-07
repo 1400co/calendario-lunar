@@ -4,7 +4,8 @@ WORKDIR /app
 COPY package*.json /app/
 RUN npm install
 COPY ./ /app/
-RUN npm run build -- --configuration production
+RUN npm run build --outputPath=./dist/ssr
+
 
 # Stage 2: Servir la aplicación con Nginx
 FROM nginx:alpine
