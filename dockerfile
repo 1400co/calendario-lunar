@@ -2,15 +2,13 @@
 FROM node:18-alpine as build-stage
 WORKDIR /app
 COPY package*.json /app/
-RUN npm install --legacy-peer
+RUN npm install
 COPY ./ /app/
-RUN npm run build --outputPath=./dist/ssr
+RUN npm run build -- --configuration production
 
-# Stage 2: Servir la aplicación con Nginx
 # Stage 2: Servir la aplicación con Nginx
 FROM nginx:alpine
 COPY --from=build-stage /app/dist/ssr/browser/ /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/nginx.conf
-RUN rm /etc/nginx/conf.d/default.conf  # Elimina la configuración predeterminada
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
