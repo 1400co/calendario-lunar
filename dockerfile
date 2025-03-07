@@ -7,8 +7,10 @@ COPY ./ /app/
 RUN npm run build --outputPath=./dist/ssr
 
 # Stage 2: Servir la aplicación con Nginx
+# Stage 2: Servir la aplicación con Nginx
 FROM nginx:alpine
 COPY --from=build-stage /app/dist/ssr/browser/ /usr/share/nginx/html
-COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+RUN rm /etc/nginx/conf.d/default.conf  # Elimina la configuración predeterminada
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
